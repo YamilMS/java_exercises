@@ -1,6 +1,5 @@
 package Actividad03.actividad03.main;
 import java.io.IOException;
-
 import static Actividad03.actividad03.introduceDatos.Pregunta.*; 
 import static Actividad03.actividad03.operaciones.OperacionesLinkia.convertirLinkiaCoins;
 import static Actividad03.actividad03.operaciones.Valores.*;
