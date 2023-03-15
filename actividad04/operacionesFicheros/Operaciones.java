@@ -4,11 +4,19 @@ import java.io.*;
 
 public class Operaciones {
 
-    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    /**
+     * En Operaciones vamos a encontrar una serie de metodos que nos permiten crear, escribir, mostrar, leer, borrar
+     * renombrar y modificar archivos
+     */
+
+     //Se declaran variables globales que van a usar los metodos de la clase Operaciones
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); //Lee el input del usuario por teclado.
     static String inputUsuario= "";
-    static String sep = File.separator;
-    static String saltoLinea = System.getProperty("line.separator");
- 
+    static String sep = File.separator; //obtiene el separador que usa el OS del cliente
+    static String saltoLinea = System.getProperty("line.separator"); //obtiene el salto de linea que usa el OS del cliente
+    
+
+    //
     public static void nuevoArchivo(String rutaCarpetaArchivos) throws IOException{
         System.out.println("Seleccione el nombre que quiere asignarle a su archivo, no olvide asignarle una extension de archivo");
         inputUsuario = br.readLine();
@@ -24,16 +32,43 @@ public class Operaciones {
         bw.close();   //se liberan los recursos asignados al outputStream
     }
 
-    public static File[] listarArchivos (String rutaCarpetaArchivos) throws IOException{
+    //
+    public static String[] listarArchivos (String rutaCarpetaArchivos) throws IOException{
         File carpetaArchivos = new File(rutaCarpetaArchivos);
         File[] archivos = carpetaArchivos.listFiles();
+        String[] dirArchivos = new String[archivos.length];
         System.out.println("Estos son los archivos contenidos en el directorio: " + rutaCarpetaArchivos);
         for(int i=0; i<archivos.length; i++) {
             if (archivos[i].isFile()) {
                 System.out.println(i+1 + " - " + archivos[i].getName());
-                System.out.println("La ruta de este archivo es: " + archivos[i].getPath());
+                dirArchivos[i]= archivos[i].getPath();
             }
          }
-        return archivos;
+        return dirArchivos;
+    }
+
+    //
+    public static void muestraArchivo(String archivo) throws IOException{
+        File showFile = new File(archivo);
+        FileReader fr = new FileReader(showFile); //Stream conectado al fichero a leer.        
+        BufferedReader brFile = new BufferedReader(fr); //Buffer que almacena datos del stream
+        for( String linea=brFile.readLine(); linea != null; linea=brFile.readLine()){
+            System.out.println(linea);  //mostramos por consola el texto leído
+        } 
+        brFile.close();
+    }
+
+    //
+    public static void borrarArchivo(String archivo) throws IOException{
+        try{
+            File documento = new File(archivo);
+            if(documento.delete()){
+                System.out.println(documento.getName() + " borrado con exito");
+            } else {
+                System.out.println("Error al borrar el archivo");
+            }
+        }catch(Exception e){
+            System.out.println("Error en el bloque try de la funcion borrarArchivo");
+        }  
     }
 }

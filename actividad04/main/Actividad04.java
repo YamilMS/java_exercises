@@ -8,14 +8,14 @@ import static operacionesFicheros.Operaciones.*;
 
 class Actividad04 {
     public static void main(String[] args) throws IOException {
-        int opcion = 0;
-        String rutaProyecto = System.getProperty("user.dir");
-        String sep = File.separator;
-        String carpetaArchivos = rutaProyecto + sep + "archivos";
-        // String saltoLinea = System.getProperty("line.separator");
-        File carpeta = new File(carpetaArchivos);
-        if (!carpeta.exists()) {
-            carpeta.mkdir();
+
+        int opcion = 0; // En esta variable guardaremos las opciones numericas que proporciona el usuario
+        String rutaProyecto = System.getProperty("user.dir"); //Obtenemos la ruta del directorio del usuario
+        String sep = File.separator; //Obtenemos el caracter que usa OS del cliente como separador
+        String carpetaArchivos = rutaProyecto + sep + "archivos"; //Creamos la ruta hacia el directorio que queremos por defecto
+        File carpeta = new File(carpetaArchivos); //En la variable carpeta creamos un File con el path correcto
+        if (!carpeta.exists()) { 
+            carpeta.mkdir(); //Verificamos si dicho directorio existe y de no hacer así lo creamos.
         }
 
 
@@ -59,17 +59,17 @@ class Actividad04 {
                 case 2:
                     listarArchivos(carpetaArchivos);
                     break;
-                /* 
                 case 3:
-                    System.out.println();
-                    valor= pideDouble("Introduce un numero para calcular su valor abosluto");
-                    muestraValorAbsoluto(valor);
+                    String[] directoriosMostrar= listarArchivos(carpetaArchivos);
+                    int posicionMostrar= pideEntero("Introduce el archivo que desea visualizar");
+                    muestraArchivo(directoriosMostrar[posicionMostrar-1]);
                     break;
                 case 4:
-                    System.out.println();
-                    opcion= pideEntero("Introduce un número para calcular un valor aleatorio entre 0 y ese numero");
-                    muestraValorAleatorio(opcion);
+                    String[] directoriosBorrar= listarArchivos(carpetaArchivos);
+                    int posicionBorrar= pideEntero("Introduce el archivo que desea eliminar");
+                    borrarArchivo(directoriosBorrar[posicionBorrar-1]);
                     break;
+                /* 
                 case 5:
                     System.out.println();
                     valor= pideDouble("Introduce un numero para calcular su logaritmo base E");
