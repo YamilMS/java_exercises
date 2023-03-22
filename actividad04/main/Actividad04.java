@@ -21,33 +21,27 @@ class Actividad04 {
 
         // Muestra un menu al usuario por consola
         do {
-            System.out.println();
-            System.out.println("Seleccione la funcion que quiere realizar");
+            System.out.println("\nSeleccione la funcion que quiere realizar");
             System.out.println("1. Nuevo archivo");
             System.out.println("2. Listar archivos");
             System.out.println("3. Muestra un archivo");
             System.out.println("4. Borrar un archivo");
             System.out.println("5. Renombrar un archivo");
             System.out.println("6. Reemplazar caracteres de un archivo");
-            System.out.println("0. Finalizar el programa");
-            System.out.println();
+            System.out.println("0. Finalizar el programa\n");
             opcion = pideEntero("introduzca la operación a realizar");
 
             // Comprueba que la opcion introducida por el usuario esta en el rango de
             // opciones
             while (opcion < 0 || opcion > 6) {
-                System.out.println();
-                System.out.println("Debe introducir un numero entero entre el 0 y el 6");
-                System.out.println();
+                System.out.println("\nDebe introducir un numero entero entre el 0 y el 6\n");
                 opcion = pideEntero("introduzca la operación a realizar");
             }
 
             // Muestra un mensaje de despedida si el usuario introduce la opcion de salir
             // del programa
             if (opcion == 0) {
-                System.out.println();
-                System.out.println("Gracias por utilizar el programa, hasta la vista");
-                System.out.println();
+                System.out.println("\nGracias por utilizar el programa, hasta la vista\n");
             }
 
             //Switch stament que seleciona la operacion a realizar segun la opcion elegida por el usuario
@@ -56,33 +50,50 @@ class Actividad04 {
                     System.out.println();
                     nuevoArchivo(carpetaArchivos);
                     break;
+                    
                 case 2:
                     listarArchivos(carpetaArchivos);
                     break;
+
                 case 3:
                     String[] directoriosMostrar= listarArchivos(carpetaArchivos);
                     int posicionMostrar= pideEntero("Introduce el archivo que desea visualizar");
-                    muestraArchivo(directoriosMostrar[posicionMostrar-1]);
+                    if(posicionMostrar<=directoriosMostrar.length){
+                        muestraArchivo(directoriosMostrar[posicionMostrar-1]);
+                    } else{
+                        System.out.println("\nNo existe el archivo que desea mostrar");
+                    }
                     break;
+
                 case 4:
                     String[] directoriosBorrar= listarArchivos(carpetaArchivos);
                     int posicionBorrar= pideEntero("Introduce el archivo que desea eliminar");
-                    borrarArchivo(directoriosBorrar[posicionBorrar-1]);
+                    if(posicionBorrar<=directoriosBorrar.length){
+                        borrarArchivo(directoriosBorrar[posicionBorrar-1]);
+                    } else{
+                        System.out.println("\nNo existe el archivo que desea borrar");
+                    }
                     break;
-                /* 
+                 
                 case 5:
-                    System.out.println();
-                    valor= pideDouble("Introduce un numero para calcular su logaritmo base E");
-                    muestraLogaritmo(valor);
+                    String[] directoriosRenombrar= listarArchivos(carpetaArchivos);
+                    int posicionRenombrar= pideEntero("Introduce el archivo que desea renombrar");
+                    if(posicionRenombrar<=directoriosRenombrar.length){
+                        renombrarArchivo(directoriosRenombrar[posicionRenombrar-1]);
+                    } else{
+                        System.out.println("\nNo existe el archivo que desea renombrar");
+                    }
                     break;
+
                 case 6:
-                    double valorSecundario;
-                    System.out.println();
-                    valor= pideDouble("Introduce un numero que será la base de la potencia");
-                    valorSecundario= pideDouble("Introduce un numero que será la potencia");
-                    calculaPotencia(valor, valorSecundario);
+                    String[] directoriosReemplazar= listarArchivos(carpetaArchivos);
+                    int posicionReemplazar= pideEntero("Introduce el archivo que desea reemplazar");
+                    if(posicionReemplazar<=directoriosReemplazar.length){
+                        reemplazarCaracteres(directoriosReemplazar[posicionReemplazar-1]);
+                    } else{
+                        System.out.println("\nNo existe el archivo que desea modificar");
+                    }
                     break;
-                */
             } 
         } while (opcion != 0);
     }

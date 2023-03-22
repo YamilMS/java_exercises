@@ -1,2 +1,1 @@
-Este es el archivo 1
-Esta es la segunda linea
+Soy el archivo 1

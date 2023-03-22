@@ -53,7 +53,7 @@ public class Operaciones {
         FileReader fr = new FileReader(showFile); //Stream conectado al fichero a leer.        
         BufferedReader brFile = new BufferedReader(fr); //Buffer que almacena datos del stream
         for( String linea=brFile.readLine(); linea != null; linea=brFile.readLine()){
-            System.out.println(linea);  //mostramos por consola el texto leído
+            System.out.println("\n" + linea);  //mostramos por consola el texto leído
         } 
         brFile.close();
     }
@@ -70,5 +70,46 @@ public class Operaciones {
         }catch(Exception e){
             System.out.println("Error en el bloque try de la funcion borrarArchivo");
         }  
+    }
+
+    //
+    public static void renombrarArchivo(String archivo) throws IOException{
+        String rutaProyecto = System.getProperty("user.dir");
+        String rutaFile= rutaProyecto + sep + "archivos";
+        try{
+            System.out.println("Seleccione el nombre con el que quiere renombrar el archivo");
+            inputUsuario = br.readLine();
+            File newName= new File(rutaFile + sep + inputUsuario);
+            File documento = new File(archivo);
+            if(documento.renameTo(newName)){
+                System.out.println(documento.getName() + " renombrado con exito");
+            } else {
+                System.out.println("Error al borrar el archivo");
+            }
+        }catch(Exception e){
+            System.out.println("Error en el bloque try de la funcion borrarArchivo");
+        }  
+    }
+
+    //
+    public static void reemplazarCaracteres (String archivo) throws IOException{
+        try{
+            RandomAccessFile raf= new RandomAccessFile(archivo, "rw");
+            System.out.println("Seleccione el caracter que desea reemplazar");
+            inputUsuario = br.readLine();
+            char caracterReemplazado = inputUsuario.charAt(0);
+            System.out.println("Seleccione el caracter que quiere que aparezca");
+            inputUsuario = br.readLine();
+            while (raf.getFilePointer() < raf.length()) {
+                byte ch = raf.readByte(); 
+                if(caracterReemplazado == ch){
+                    raf.seek(raf.getFilePointer()-1);
+                    raf.writeBytes(inputUsuario);
+                }
+            }
+            raf.close();
+        }catch(Exception e){
+            System.out.println("Error en el bloque try de la funcion reemplazarCaracteres");
+        }
     }
 }
