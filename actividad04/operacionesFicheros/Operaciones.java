@@ -16,7 +16,8 @@ public class Operaciones {
     static String saltoLinea = System.getProperty("line.separator"); //obtiene el salto de linea que usa el OS del cliente
     
 
-    //
+    // Este metodo crea un nuevo archivo. Primero pide al usuario el nombre del archivo y luego crea ese archivo
+    // en la ruta determinada. Por ultimo le pide al usuario que introduzca el texto que quiere que contenga el archivo.
     public static void nuevoArchivo(String rutaCarpetaArchivos) throws IOException{
         System.out.println("Seleccione el nombre que quiere asignarle a su archivo, no olvide asignarle una extension de archivo");
         inputUsuario = br.readLine();
@@ -32,7 +33,7 @@ public class Operaciones {
         bw.close();   //se liberan los recursos asignados al outputStream
     }
 
-    //
+    //Muestra todos los archivos que hay un directorio, sin mostrar directorios. Además retorna un array con las rutas de los archivos.
     public static String[] listarArchivos (String rutaCarpetaArchivos) throws IOException{
         File carpetaArchivos = new File(rutaCarpetaArchivos);
         File[] archivos = carpetaArchivos.listFiles();
@@ -47,7 +48,7 @@ public class Operaciones {
         return dirArchivos;
     }
 
-    //
+    // Lee un archivo con FileReader y BufferedReader linea a linea.
     public static void muestraArchivo(String archivo) throws IOException{
         File showFile = new File(archivo);
         FileReader fr = new FileReader(showFile); //Stream conectado al fichero a leer.        
@@ -58,7 +59,7 @@ public class Operaciones {
         brFile.close();
     }
 
-    //
+    //Elimina un archivo determinado por el usuario
     public static void borrarArchivo(String archivo) throws IOException{
         try{
             File documento = new File(archivo);
@@ -72,7 +73,7 @@ public class Operaciones {
         }  
     }
 
-    //
+    //Cambia el nombre de un archivo elegido por el usuario
     public static void renombrarArchivo(String archivo) throws IOException{
         String rutaProyecto = System.getProperty("user.dir");
         String rutaFile= rutaProyecto + sep + "archivos";
@@ -91,7 +92,7 @@ public class Operaciones {
         }  
     }
 
-    //
+    //Usando RandomAccessFile reemplazamos unos caracteres determinados por el usuario
     public static void reemplazarCaracteres (String archivo) throws IOException{
         try{
             RandomAccessFile raf= new RandomAccessFile(archivo, "rw");
